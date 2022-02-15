@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Repository.OrderService;
 import com.example.model.Order;
 import com.example.model.Product;
-import com.example.service.OrderService;
 
 
 @RestController

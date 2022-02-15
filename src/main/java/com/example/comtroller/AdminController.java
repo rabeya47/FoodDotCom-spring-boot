@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.User;
-import com.example.service.UserService;
+import com.example.Repository.AdminService;
+import com.example.model.Admin;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class UserController {
+public class AdminController {
 
 	@Autowired
-	UserService userService;
+	AdminService adminService;
 
 	@GetMapping("/")
 	public String hello() {
@@ -30,12 +30,12 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/user/save")
-	public ResponseEntity<?> save(@RequestBody User entity) {
+	public ResponseEntity<?> save(@RequestBody Admin entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			User user = userService.save(entity);
+			Admin admin = adminService.save(entity);
 			map.put("message", "Data save successfully");
-			map.put("Data", user);
+			map.put("Data", admin);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -53,9 +53,9 @@ public class UserController {
 	public ResponseEntity<?> findById(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			User user = userService.findById(id).get();
+			Admin admin = adminService.findById(id).get();
 			map.put("message", "Data get successfully");
-			map.put("Data", user);
+			map.put("Data", admin);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -73,9 +73,9 @@ public class UserController {
 	public ResponseEntity<?> getUsers() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<User> user =(List<User>) userService.findAll();
+			List<Admin> admin =(List<Admin>) adminService.findAll();
 			map.put("message", "Data get successfully");
-			map.put("Data", user);
+			map.put("Data", admin);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -91,12 +91,12 @@ public class UserController {
 	
 
 	@PostMapping(value = "/user/update")
-	public ResponseEntity<?> update(@RequestBody User entity) {
+	public ResponseEntity<?> update(@RequestBody Admin entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			User user = userService.save(entity);
+			Admin admin = adminService.save(entity);
 			map.put("message", "Data updated successfully");
-			map.put("Data", user);
+			map.put("Data", admin);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -113,11 +113,11 @@ public class UserController {
 	@GetMapping(value = "/user/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
-		User user = userService.findById(id).get();
+		Admin admin = adminService.findById(id).get();
 		try {
-			userService.delete(user);
+			adminService.delete(admin);
 			map.put("message", "Data deleted successfully");
-			map.put("Data", user);
+			map.put("Data", admin);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {

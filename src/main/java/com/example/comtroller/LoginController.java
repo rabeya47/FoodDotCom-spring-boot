@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.User;
+import com.example.Repository.AdminService;
+import com.example.model.Admin;
 import com.example.request.PayLoad;
-import com.example.service.UserService;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class LoginController {
 
 	@Autowired
-	public UserService userService;
+	public AdminService adminService;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody PayLoad payload) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
-			List<User> userList = (List<User>) userService.findAll();
+			List<Admin> userList = (List<Admin>) adminService.findAll();
 
 			if (userList != null && userList.size() > 0) {
-				User user = userList.get(0);
+				Admin admin = userList.get(0);
 
-				if (user.getPassword().equals(payload.getPassword())) {
+				if (admin.getPassword().equals(payload.getPassword())) {
 					map.put("message", "Login Successful");
 					map.put("status", "Success");
-					map.put("data", user);
+					map.put("data", admin);
 					return ResponseEntity.ok(map);
 				} else {
 					map.put("message", "Username or password doesn't match");

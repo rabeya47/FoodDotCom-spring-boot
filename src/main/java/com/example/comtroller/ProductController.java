@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.Repository.ProductService;
 import com.example.model.Product;
-import com.example.service.ProductService;
 import com.example.storage.service.FileStorageService;
 
 

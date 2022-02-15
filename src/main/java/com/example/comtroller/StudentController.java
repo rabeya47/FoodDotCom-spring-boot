@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Repository.StudentService;
 import com.example.model.Student;
-import com.example.service.StudentService;
 
 
 @RestController
