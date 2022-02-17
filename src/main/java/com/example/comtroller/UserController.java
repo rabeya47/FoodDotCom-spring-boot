@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Repository.UserRepo;
 
 import com.example.model.User;
+import com.example.request.PayLoad;
 
 
 @RestController
@@ -28,22 +29,20 @@ public class UserController {
 	@Autowired
 	UserRepo userRepo;
 
-	
-
 	@PostMapping(value = "/user/save")
 	public ResponseEntity<?> save(@RequestBody User entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
 			User user = userRepo.save(entity);
 			map.put("message", "Data save successfully");
-			map.put("Data", user);
-			map.put("Status code", 200);
+			map.put("data", user);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data saved failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -56,14 +55,14 @@ public class UserController {
 		try {
 			User user = userRepo.findById(id).get();
 			map.put("message", "Data get successfully");
-			map.put("Data", user);
-			map.put("Status code", 200);
+			map.put("data", user);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -76,14 +75,14 @@ public class UserController {
 		try {
 			List<User> user =(List<User>) userRepo.findAll();
 			map.put("message", "Data get successfully");
-			map.put("Data", user);
-			map.put("Status code", 200);
+			map.put("data", user);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -97,14 +96,14 @@ public class UserController {
 		try {
 			User user = userRepo.save(entity);
 			map.put("message", "Data updated successfully");
-			map.put("Data", user);
-			map.put("Status code", 200);
+			map.put("data", user);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data updated failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -118,16 +117,59 @@ public class UserController {
 		try {
 			userRepo.delete(user);
 			map.put("message", "Data deleted successfully");
-			map.put("Data", user);
-			map.put("Status code", 200);
+			map.put("data", user);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data deletation failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
 	
+	
+	
+	
+	
+	
+	@PostMapping("/user/login")
+	public ResponseEntity<?> login(@RequestBody PayLoad payload) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		try {
+			List<User> userList = (List<User>) userRepo.findAll();
+
+			if (userList != null && userList.size() > 0) {
+				User user = userList.get(0);
+
+				if (user.getPassword().equals(payload.getPassword())) {
+					map.put("message", "Login Successful");
+					map.put("status", "success");
+					map.put("data", user);
+					map.put("statusCode", 200);
+					return ResponseEntity.ok(map);
+				} else {
+					map.put("message", "email or password doesn't match");
+					map.put("status", "failed");
+					map.put("data", null);
+					return ResponseEntity.status(412).body(map);
+				}
+				
+			}else {
+				map.put("message", "Data not found");
+				map.put("status", "failed");
+				map.put("data", null);
+				return ResponseEntity.status(412).body(map);
+			}
+
+		} catch (Exception e) {
+			map.put("message", e.getLocalizedMessage());
+			map.put("status", "Failed");
+			map.put("data", null);
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 }
