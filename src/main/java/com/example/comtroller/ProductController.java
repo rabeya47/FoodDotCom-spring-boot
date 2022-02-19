@@ -42,14 +42,14 @@ public class ProductController {
 		try {
 			Product product = productService.save(entity);
 			map.put("message", "Data save successfully");
-			map.put("Data", product);
-			map.put("Status code", 200);
+			map.put("data", product);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data saved failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -78,6 +78,7 @@ public class ProductController {
 			map.put("status", "Success");
 			map.put("data", product);
 			map.put("message", "Data saved successfully");
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			map.put("status", "failed");
@@ -96,14 +97,14 @@ public class ProductController {
 		try {
 			Product product = productService.findById(id).get();
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
-			map.put("Status code", 200);
+			map.put("data", product);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -121,14 +122,14 @@ public class ProductController {
 		try {
 			List<Product> product =(List<Product>) productService.findByCetegoryId(categoryId);
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
-			map.put("Status code", 200);
+			map.put("data", product);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -143,14 +144,14 @@ public class ProductController {
 		try {
 			List<Product> product =(List<Product>) productService.findAll();
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
-			map.put("Status code", 200);
+			map.put("data", product);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -177,6 +178,7 @@ public class ProductController {
 			map.put("status", "Success");
 			map.put("data", product);
 			map.put("message", "Data update successfully");
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			map.put("status", "failed");
@@ -197,14 +199,14 @@ public class ProductController {
 		try {
 			productService.delete(product);
 			map.put("message", "Data deleted successfully");
-			map.put("Data", product);
-			map.put("Status code", 200);
+			map.put("data", product);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data deletation failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}

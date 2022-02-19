@@ -37,14 +37,14 @@ public class OrderColtroller {
 			Order order = orderService.save(entity);
 			
 			map.put("message", "Data save successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data saved failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -57,14 +57,14 @@ public class OrderColtroller {
 		try {
 			Order order = orderService.findById(id).get();
 			map.put("message", "Data get successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -77,14 +77,14 @@ public class OrderColtroller {
 		try {
 			List<Order> order =(List<Order>) orderService.findAll();
 			map.put("message", "Data get successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -98,14 +98,14 @@ public class OrderColtroller {
 		try {
 			Order order = orderService.save(entity);
 			map.put("message", "Data updated successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data updated failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -119,14 +119,14 @@ public class OrderColtroller {
 		try {
 			orderService.delete(order);
 			map.put("message", "Data deleted successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data deletation failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -144,14 +144,14 @@ public class OrderColtroller {
 			order.setStatus("cancel");
 			 order = orderService.save(order);
 			map.put("message", "Data updated successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data updated failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -167,14 +167,14 @@ public class OrderColtroller {
 			order.setStatus("delivered");
 			 order = orderService.save(order);
 			map.put("message", "Data updated successfully");
-			map.put("Data", order);
-			map.put("Status code", 200);
+			map.put("data", order);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Data updated failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
