@@ -1,0 +1,268 @@
+package com.example;
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class FindLargest_ThreeNumber {
+	public static void main(String[] args) {
+		int x = 7;
+		int y = 20;
+		int z = 56;
+
+		if (x > y && x > z) {
+			
+			System.out.println(x);
+
+		} else if (y > x && y > z) {
+			
+			System.out.println(y);
+			
+		} else {
+			System.out.println(z);
+		}
+
+	}
+}
+
+
+===================================================================================================
+
+
+package com.example;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class LeapYear {
+
+    public static void main(String[] args) {
+        int year = 2016;
+
+        isLeapYear(year);
+        System.out.println(isLeapYear(year));
+    }
+
+    private static boolean isLeapYear(int year) {
+        if ((year % 4 == 0 || year % 400 == 0) && year % 100 != 0) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+}
+
+
+
+===================================================================================================
+
+package com.example;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class PrimeNum_1ToN {
+	public static void main(String[] args) {
+		int n = 11;
+		for (int i = 1; i <= n; i++) {
+			if(isPrime(i)) {
+				System.out.print(i+" ");
+			}
+		}
+	}
+
+	private static boolean isPrime(int n) {
+		if (n <= 1)
+			return false;
+		for (int i = 2; i < n; i++) {
+			if (n % 2 == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+}
+
+====================================================================================================
+
+
+package com.example;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Singleton_class_example {
+
+    public static void main(String[] args) {
+
+        Singleton_model sdt = Singleton_model.getInstance();
+
+    }
+
+}
+
+
+
+=================================================================================================
+
+
+
+package com.example;
+
+public class Singleton_model {
+private static Singleton_model st = null;
+
+
+	private Singleton_model() {
+	
+	}
+	
+	public static Singleton_model getInstance() {
+		if(st==null) {
+			st = new Singleton_model();
+		}
+		return st;
+	}
+
+}
+
+
+
+================================================================================================
+
+
+package com.example;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class SprialPrint {
+		public static void main(String[] args) {
+			int[][] m = {
+					{1,2,3,4},
+					{5,6,7,8},
+					{9,10,11,12}
+					
+			};
+			//sprialOrder(m);	
+			System.out.println(sprialOrder(m));
+		}
+
+		private static List<Integer> sprialOrder(int[][] matrix) {
+			List<Integer> list = new ArrayList<Integer>();
+			int rs = 0;
+			int re = matrix.length -1 ;
+			int cs = 0;
+			int ce = matrix[0].length -1;
+			
+			while (rs <= re && cs <= ce) {
+				//go right
+				for (int i = rs; i <= ce ; i++) {
+					list.add(matrix[rs][i]);
+				}
+				rs++;
+				
+				//go down
+				for (int i = rs; i <= re ; i++) {
+					list.add(matrix[i][ce]);
+				}
+				ce--;
+				
+				if(rs <= re) {
+					//go left
+					for (int i = ce; i >= cs ; i--) {
+						list.add(matrix[re][i]); 
+					}
+					
+					re--;
+				}
+				
+				
+				if (cs <= ce) {
+					// go up
+					for (int i = re; i >= rs; i--) {
+						list.add(matrix[i][cs]);
+					}
+					cs++;
+				}
+			}
+			
+			return list;
+			
+		}
+		
+		
+		
+}
+
+
+
+==================================================================================================
+
+
+package com.example;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Swapping_values {
+
+    public static void main(String[] args) {
+        int a = 8;
+        int b = 9;
+
+        System.out.println("before swapping values are :" + a + "," + b);
+        a = a + b; // 17
+        b = a - b; // 8
+        a = a - b; // 9
+
+        System.out.println("after swapping values are :" + a + "," + b);
+
+    }
+}
+
+
+
+======================================================================================================
+
+
+
+package com.example;
+
+import java.util.Arrays;
+
+public class TwoSumMain {
+
+	public static void main(String[] args) {
+		int[] arr = {15,10,4,7,23};
+		int target =11 ;
+		
+		int[] sumarr = sumArray(arr, target);
+		System.out.print(Arrays.toString(sumarr));
+	}
+
+	private static int[] sumArray(int[] arr, int target) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr.length; j++) {
+				int sum = arr[i] + arr[j];
+				
+				if (sum == target) {
+					return new int[] {i , j};
+				}
+			}
+		}
+		
+		return new int[] {-1};
+		
+		
+	}
+}
