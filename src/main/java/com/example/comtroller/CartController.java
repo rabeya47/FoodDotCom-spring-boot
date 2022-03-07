@@ -9,13 +9,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.Repository.CartRepo;
 import com.example.model.Cart;
+import com.example.model.Product;
+import com.example.storage.service.FileStorageService;
 
 
 @RestController
@@ -25,7 +31,10 @@ public class CartController {
 	@Autowired
 	CartRepo cartRepo;
 	
+	@Autowired
+	private FileStorageService fileStorageService;
 	
+	//for without image file
 	@PostMapping(value = "/cart/save")
 	public ResponseEntity<?> save(@RequestBody Cart entity) {
 		Map<String, Object> map = new HashMap<>();
@@ -43,6 +52,41 @@ public class CartController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
+	
+	
+	
+	//for save products with file.
+	
+		@PostMapping("/addCart_withfile")
+		public ResponseEntity<Map> saveFormData(@ModelAttribute Cart cart,
+				@RequestParam("file") MultipartFile file) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			try {
+
+				String fileName = fileStorageService.storeFile(file);
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
+						.path(fileName).toUriString();
+				cart.setImages(fileName);
+				cart.setImagesUri(fileDownloadUri);
+				
+				
+				cart = cartRepo.save(cart);
+				map.put("status", "Success");
+				map.put("data", cart);
+				map.put("message", "Data saved successfully");
+				map.put("statusCode", 200);
+				return ResponseEntity.ok(map);
+			} catch (Exception e) {
+				map.put("status", "failed");
+				map.put("data", null);
+				map.put("message", e.getLocalizedMessage());
+				return ResponseEntity.status(500).body(map);
+			}
+
+		}
+		
+	
+	
 	
 	
 	
