@@ -58,16 +58,10 @@ public class CartController {
 	//for save products with file.
 	
 		@PostMapping("/addCart_withfile")
-		public ResponseEntity<Map> saveFormData(@ModelAttribute Cart cart,
-				@RequestParam("file") MultipartFile file) {
+		public ResponseEntity<Map> saveFormData(@RequestBody Cart cart) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			try {
 
-				String fileName = fileStorageService.storeFile(file);
-				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
-						.path(fileName).toUriString();
-				cart.setImages(fileName);
-				cart.setImagesUri(fileDownloadUri);
 				
 				
 				cart = cartRepo.save(cart);

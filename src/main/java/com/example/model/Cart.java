@@ -16,9 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Cart {
 	
 	
-	 @Transient
-	 @JsonIgnore
-	 MultipartFile file;	
+	
 	
 
 @Id
@@ -28,11 +26,8 @@ private int id;
 private String productName;
 private int quantity;
 private double price;
-private String status;
-private double total;
+private String imageUri;
 
-private String images;
-private String imagesUri;
 
 
 public int getId() {
@@ -59,36 +54,14 @@ public double getPrice() {
 public void setPrice(double price) {
 	this.price = price;
 }
-public String getStatus() {
-	return status;
+public String getImageUri() {
+	return imageUri;
 }
-public void setStatus(String status) {
-	this.status = status;
+public void setImageUri(String imageUri) {
+	this.imageUri = imageUri;
 }
-public MultipartFile getFile() {
-	return file;
-}
-public void setFile(MultipartFile file) {
-	this.file = file;
-}
-public double getTotal() {
-	return total;
-}
-public void setTotal(double total) {
-	this.total = total;
-}
-public String getImages() {
-	return images;
-}
-public void setImages(String images) {
-	this.images = images;
-}
-public String getImagesUri() {
-	return imagesUri;
-}
-public void setImagesUri(String imagesUri) {
-	this.imagesUri = imagesUri;
-}
+
+
 
 
 
