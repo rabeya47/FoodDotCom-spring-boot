@@ -1,5 +1,6 @@
 package com.example.comtroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.Repository.ProductService;
@@ -212,4 +214,30 @@ public class ProductController {
 	}
 	
 
+	
+	
+	//For product search
+	@GetMapping("/product/search")
+	public ResponseEntity<?> search(@RequestParam(value = "searchText") String searchText) {
+		Map<String, Object> map = new HashMap<String, Object>();	
+		try {
+			List<Product> productList = productService.searchProduct(searchText);
+			map.put("message", "Data deleted successfully");
+			map.put("data", productList);
+			map.put("statusCode", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data deletation failed");
+			map.put("data", null);
+			map.put("statusCode", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+		
+	}
+	
+	
+	
+	
+	
 }
